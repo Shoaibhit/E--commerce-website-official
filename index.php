@@ -96,10 +96,19 @@ session_start();
     <!-- 2nd child  -->
     <nav class="navbar navbar-expand lg-m-auto navbar-dark bg-secondary">
       <ul class="navbar-nav me-auto">
-        <li class="nav-item">
-          <a class="nav-link" href="#">Wellcome guest</a>
-        </li>
+
 <?php
+  if(!isset($_SESSION['username'])){
+          echo " <li class='nav-item'>
+          <a class='nav-link' href='#'>Wellcome guest</a>
+        </li>";
+        }else{
+          echo " <li class='nav-item'>
+          <a class='nav-link' href='#'>Welcome " .$_SESSION['username']."</a>
+        </li>";
+        }
+
+
         if(!isset($_SESSION['username'])){
           echo " <li class='nav-item'>
           <a class='nav-link' href='./user_area/user_login.php'>login</a>

@@ -9,8 +9,7 @@ if(isset($_POST['insert_cat'])){
 
     if($number>0){
         echo "<script> alert('categories already exist') </script>";
-    }
-    else{
+    }else{
     $insert_query=" insert into `categories` (categorie_name) values (' $categorie_title') ";
     $result =mysqli_query($con, $insert_query);
     if($result){

@@ -26,13 +26,13 @@ session_start();
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="../style.css" />
   </head>
   <body>
     <div class="container-fluid p-0">
       <nav class="navbar navbar-expand-lg bg-info">
         <div class="container-fluid p-0">
-          <img src="logo.png" alt="" class="logo" />
+          <img src="../logo.png" alt="" class="logo" />
           <button
             class="navbar-toggler"
             type="button"
@@ -47,13 +47,13 @@ session_start();
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="index.php">Home</a>
+                <a class="nav-link active" aria-current="page" href="../index.php">Home</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="display_all.php">Products</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Register</a>
+                <a class="nav-link" href="user_registration.php">Register</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#">Contact</a>
@@ -80,20 +80,27 @@ session_start();
     <!-- 2nd child  -->
     <nav class="navbar navbar-expand lg-m-auto navbar-dark bg-secondary">
       <ul class="navbar-nav me-auto">
-        <li class="nav-item">
-          <a class="nav-link" href="#">Wellcome guest</a>
-        </li>
+
         <?php
+          if(!isset($_SESSION['username'])){
+          echo " <li class='nav-item'>
+          <a class='nav-link' href='#'>Wellcome guest</a>
+        </li>";
+        }else{
+          echo " <li class='nav-item'>
+          <a class='nav-link' href='#'>Welcome " . $_SESSION['username']."</a>
+        </li>";
+        }
         if(!isset($_SESSION['username'])){
           echo " <li class='nav-item'>
           <a class='nav-link' href='./user_login.php'>login</a>
         </li>";
         }else{
           echo " <li class='nav-item'>
-          <a class='nav-link' href='logout.php'>logout</a>
+          <a class='nav-link' href='./logout.php'>logout</a>
         </li>";
         }
-        ?>
+        ?> 
       </ul>
     </nav>
     <!-- third child -->
