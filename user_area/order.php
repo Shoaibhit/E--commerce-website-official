@@ -14,6 +14,8 @@ $total_price=0;
 $cart_query_price="select * from `cart_details` where ip_adress='$get_ip_adress'";
 $result_cart_price=mysqli_query($con,$cart_query_price);
 $count_product=mysqli_num_rows($result_cart_price);
+$invoice_number=mt_rand();
+$status='pending';
 while($row_price=mysqli_fetch_array($result_cart_price)){
     $product_id=$row_price['product_id'];
     $cart_product="select * from `products` where product_id=$product_id";
@@ -25,5 +27,37 @@ while($row_price=mysqli_fetch_array($result_cart_price)){
 
     }
 }
+
+// getting  quantity from cart 
+$get_cart="select * from `cart_details`";
+$run_cart=mysqli_query($con,$get_cart);
+$get_item_quantity=mysqli_fetch_array($run_cart);
+$quantity=$get_item_quantity['quantity'];
+if($quantity==0){
+    $quantity=1;
+    $subtotal=$total_price;
+}else{
+    $quantity=$quantity;
+    $subtotal=$total_price*$quantity;
+}
+
+
+$insert_order="insert into `user_orders` (user_id,amount_due,invoice_number,total_products,order_date,order_status) values ($user_id,$subtotal,$invoice_number,$count_product,NOW(),'$status')";
+$result_query=mysqli_query($con,$insert_order);
+if($result_query){
+    echo "<script>alert('order are submited sucessfuly')</script>";
+    echo "<script>window.open('profile.php','_self')</script>";
+}
+
+// order pending 
+$insert_pending_order="insert into `orders_pending` (user_id,invoice_number,product_id,quantity,order_status) values ($user_id,$invoice_number,$product_id,$quantity,'$status')";
+$result_pending_orders=mysqli_query($con,$insert_pending_order);
+
+
+// delete items from cart
+
+$empty_cart="Delete from `cart_details` where ip_adress='$get_ip_adress'";
+$result_delete=mysqli_query($con,$empty_cart);
+
 
 ?>

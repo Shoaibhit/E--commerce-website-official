@@ -1,3 +1,12 @@
+<?php
+include('../include/connect.php');
+include('../functions/common_functions.php');
+?>
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,6 +32,10 @@
         .img1{
           height: 50px;
           object-fit:contain;
+        }
+        .product_image{
+            width: 100px;
+            object-fit:contain;
         }
     </style>
 </head>
@@ -51,11 +64,11 @@
                 </div>
                 <div class="buttton text-center ms-5 " >
                     <button class="my-3"><a href="insert_product.php" class="nav-link text-light bg-info my-1">Insert products</a></button>
-                    <button><a href="" class="nav-link text-light bg-info my-1">View products</a></button>
+                    <button><a href="index.php?view_products" class="nav-link text-light bg-info my-1">View products</a></button>
                     <button><a href="index.php?insert_categories" class="nav-link text-light bg-info my-1">Insert categories</a></button>
-                    <button><a href="" class="nav-link text-light bg-info my-1">View categories</a></button>
+                    <button><a href="index.php?view_categories" class="nav-link text-light bg-info my-1">View categories</a></button>
                     <button><a href="index.php?insert_brand" class="nav-link text-light bg-info my-1">Insert brand</a></button>
-                    <button><a href="" class="nav-link text-light bg-info my-1">View Brand</a></button>
+                    <button><a href="index.php?view_brands" class="nav-link text-light bg-info my-1">View Brand</a></button>
                     <button><a href="" class="nav-link text-light bg-info my-1">All orders</a></button>
                     <button><a href="" class="nav-link text-light bg-info my-1">All payments</a></button>
                     <button><a href="" class="nav-link text-light bg-info my-1">List users</a></button>
@@ -75,8 +88,29 @@
         if(isset($_GET['insert_brand'])){
             include('insert_brand.php');
         }
+        if(isset($_GET['view_products'])){
+            include('view_products.php');
+        }
+          if(isset($_GET['edit_products'])){
+            include('edit_products.php');
+        }
+          if(isset($_GET['delete_product'])){
+            include('delete_product.php');
+        }
+          if(isset($_GET['view_categories'])){
+            include('view_categories.php');
+        }
+          if(isset($_GET['view_brands'])){
+            include('view_brands.php');
+        }
+          if(isset($_GET['edit_categorie'])){
+            include('edit_categorie.php');
+        }
 
         ?>
+         <?php
+    include("../include/footer.php");
+    ?>
      </div>
 
 
